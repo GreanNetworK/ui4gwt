@@ -15,9 +15,12 @@ gwt-unitCache/
 war/WEB-INF/deploy/
 war/WEB-INF/classes/
 
-# Eclipse project stucture #
+# Eclipse project structure #
 .project
 .settings/
 *.classpath
 target/
 
+# intelliJ project structure#
+.idea
+*.iml
