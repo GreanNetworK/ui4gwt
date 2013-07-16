@@ -8,6 +8,18 @@
 	</parent>
 	<artifactId>ui</artifactId>
 
+	<dependencies>
+		<!-- GWT -->
+		<dependency>
+			<groupId>com.google.gwt</groupId>
+			<artifactId>gwt-servlet</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.google.gwt</groupId>
+			<artifactId>gwt-user</artifactId>
+		</dependency>
+	</dependencies>
+
 	<build>
 		<plugins>
 			<plugin>
@@ -17,11 +29,13 @@
 				<executions>
 					<execution>
 						<goals>
-							<goal>compile</goal>
 							<goal>test</goal>
 						</goals>
 					</execution>
 				</executions>
+				<configuration>
+					<module>com.mockupcode.ui4gwt.ui.Ui</module>
+				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -30,9 +44,6 @@
 				<configuration>
 					<source>1.6</source>
 					<target>1.6</target>
-					<compilerArgument>-Xlint:all</compilerArgument>
-					<showWarnings>true</showWarnings>
-					<showDeprecation>true</showDeprecation>
 				</configuration>
 			</plugin>
 		</plugins>

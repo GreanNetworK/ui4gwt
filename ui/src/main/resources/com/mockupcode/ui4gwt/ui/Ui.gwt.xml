@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module>
+	<inherits name='com.google.gwt.user.User' />
+
+	<public path="embedded" />
+	<script src="jquery-1.9.1.js"/>
+	<script src="ui/jquery-ui.custom.js"/>
+
+	<source path='slider' />
+</module>
