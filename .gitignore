@@ -18,4 +18,5 @@ war/WEB-INF/classes/
 # Eclipse project stucture #
 .project
 .settings/
+*.classpath
 
