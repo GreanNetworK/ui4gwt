@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module>
 	<inherits name='com.google.gwt.user.User' />
+    <inherits name="com.google.gwt.core.Core"/>
+    <inherits name="com.google.gwt.i18n.I18N"/>
+    <inherits name="com.google.gwt.json.JSON" />
 
 	<public path="embedded" />
 	<script src="jquery-1.9.1.js"/>
