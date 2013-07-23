@@ -11,6 +11,11 @@ import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.Random;
 import com.google.gwt.user.client.ui.Widget;
+import com.mockupcode.ui4gwt.ui.slider.event.SlideEvent;
+import com.mockupcode.ui4gwt.ui.slider.event.StopEvent;
+import com.mockupcode.ui4gwt.ui.slider.handler.SlideHandler;
+import com.mockupcode.ui4gwt.ui.slider.handler.StopHandler;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,9 +26,9 @@ import java.util.List;
 public class Slider extends Widget{
 
     private JSONObject options;
-    private List<SliderListener> sliderListeners = new ArrayList<SliderListener>();
+    private List<SlideHandler> slideHandlers = new ArrayList<SlideHandler>();
+    private List<StopHandler> stopHandlers = new ArrayList<StopHandler>();
     
-    //Option variable for when onStop not change value
     private double minValue;
     private double maxValue;
 
@@ -37,7 +42,7 @@ public class Slider extends Widget{
         super();
         Element divEle = DOM.createDiv();
         setElement(divEle);
-        divEle.setId("phoenix-slider" + Random.nextInt());
+        divEle.setId("slider" + Random.nextInt());
 
         this.options = options;
         if (options == null) {
@@ -110,35 +115,25 @@ public class Slider extends Widget{
         setValuesNative(getElement().getId(), vals.getJavaScriptObject());
     }
     
-    public void addListener(SliderListener sliderListener){
-        sliderListeners.add(sliderListener);
-    }
-    
-    public void removeListener(SliderListener sliderListener){
-        sliderListeners.remove(sliderListener);
-    }
-    
-    private void fireOnStopEvent(Event evt, JsArrayNumber values){
+    private void onStopEvent(Event evt, JsArrayNumber values){
         Double[] vals = extractArray(values);
-        
-        //Add Options keep it state (This state make external Jqeury state do on DOM Element please take care to change it)
         this.options = getOptions(0, 100, new double[]{vals[0], vals[1]});
         
         if(vals[0] != minValue || vals[1] != maxValue){
         	minValue = vals[0];
         	maxValue = vals[1];
-	        SliderEvent e = new SliderEvent(this, evt, vals);
-	        for(SliderListener sliderListener : sliderListeners){
+	        StopEvent e = new StopEvent(this, evt, vals);
+	        for(StopHandler sliderListener : stopHandlers){
 	            sliderListener.onStop(e);
 	        }
         }
     }
     
-    private void fireOnSlideEvent(Event evt, JsArrayNumber values){
+    private void onSlideEvent(Event evt, JsArrayNumber values){
         Double[] vals = extractArray(values);        
-        SliderEvent e = new SliderEvent(this, evt, vals);
-        for(SliderListener sliderListener : sliderListeners){
-            sliderListener.onSlide(e);
+        SlideEvent e = new SlideEvent(this, evt, vals);
+        for(SlideHandler sliHandler : slideHandlers){
+        	sliHandler.onSlide(e);
         }
     }
     
@@ -153,10 +148,10 @@ public class Slider extends Widget{
 
     private native void createSlider(Slider slider, String id, JavaScriptObject options) /*-{
         options.stop = function(event, ui) {
-            slider.@com.mockupcode.ui4gwt.ui.slider.Slider::fireOnStopEvent(Lcom/google/gwt/user/client/Event;Lcom/google/gwt/core/client/JsArrayNumber;)(event, ui.values);
+            slider.@com.mockupcode.ui4gwt.ui.slider.Slider::onStopEvent(Lcom/google/gwt/user/client/Event;Lcom/google/gwt/core/client/JsArrayNumber;)(event, ui.values);
         };
         options.slide = function(event, ui) {
-            slider.@com.mockupcode.ui4gwt.ui.slider.Slider::fireOnSlideEvent(Lcom/google/gwt/user/client/Event;Lcom/google/gwt/core/client/JsArrayNumber;)(event, ui.values);
+            slider.@com.mockupcode.ui4gwt.ui.slider.Slider::onSlideEvent(Lcom/google/gwt/user/client/Event;Lcom/google/gwt/core/client/JsArrayNumber;)(event, ui.values);
         };
         $wnd.jQuery("#" + id).slider(options);
     }-*/;
@@ -181,32 +176,4 @@ public class Slider extends Widget{
         $wnd.jQuery("#" + id).slider("option", "values", values);
     }-*/;
     
-    public class SliderEvent{
-        private Double[] values;
-        private Slider source;
-        private Event event;
-
-        public SliderEvent( Slider source, Event event,Double[] values) {
-            this.values = values;
-            this.source = source;
-            this.event = event;
-        }
-
-        public Double[] getValues() {
-            return values;
-        }
-
-        public Slider getSource() {
-            return source;
-        }
-
-        public Event getEvent() {
-            return event;
-        }
-    }
-    
-    public interface SliderListener {
-        public void onStop(Slider.SliderEvent event);
-        public void onSlide(Slider.SliderEvent event);
-    }
 }
