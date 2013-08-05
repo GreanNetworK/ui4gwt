@@ -3,7 +3,7 @@ package com.mockupcode.ui4gwt.ui.slider.event;
 import java.util.Arrays;
 
 import com.google.gwt.user.client.Event;
-import com.mockupcode.ui4gwt.ui.slider.Slider;
+import com.google.gwt.user.client.ui.Widget;
 
 /**
  * Created with IntelliJ IDEA.
@@ -14,10 +14,10 @@ import com.mockupcode.ui4gwt.ui.slider.Slider;
  */
 public abstract class BaseEvent {
     private Double[] values;
-    private Slider source;
+    private Widget source;
     private Event event;
 
-    protected BaseEvent( Slider source, Event event,Double[] values) {
+    protected BaseEvent( Widget source, Event event,Double[] values) {
         this.values = Arrays.copyOf(values, values.length);
         this.source = source;
         this.event = event;
@@ -27,7 +27,7 @@ public abstract class BaseEvent {
         return values;
     }
 
-    public Slider getSource() {
+    public Widget getSource() {
         return source;
     }
 
