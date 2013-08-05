@@ -64,7 +64,7 @@ public class SliderOptions {
 		this.value = value;
 	}
 	public Number[] getValues() {
-		return values.clone();
+		return (values==null)?null:values.clone();
 	}
 	public void setValues(Number[] values) {
 		this.values = Arrays.copyOf(values, values.length);
