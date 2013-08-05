@@ -1,9 +1,21 @@
 package com.mockupcode.ui4gwt.ui.slider.options;
 
-import java.util.Arrays;
+import com.google.gwt.json.client.JSONBoolean;
+import com.google.gwt.json.client.JSONObject;
+import com.mockupcode.ui4gwt.ui.option.Options;
 
 
-public class SliderOptions {
+public class SliderOptions implements Options {
+	
+	public static final String ANIMATE = "animate";
+	public static final String DISABLED = "disabled";
+	public static final String MAX = "max";
+	public static final String MIN = "min";
+	public static final String ORIENTATION = "orientation";
+	public static final String RANGE = "range";
+	public static final String STEP = "step";
+	public static final String VALUE = "value";
+	public static final String VALUES = "values";
 	
 	private boolean animate = false;
 	private boolean disabled = false;
@@ -64,10 +76,16 @@ public class SliderOptions {
 		this.value = value;
 	}
 	public Number[] getValues() {
-		return (values==null)?null:values.clone();
+		return values;
 	}
 	public void setValues(Number[] values) {
-		this.values = Arrays.copyOf(values, values.length);
+		this.values = values;
+	}
+	@Override
+	public JSONObject getOptions() {
+		JSONObject options = new JSONObject();
+        options.put(ANIMATE, JSONBoolean.getInstance(animate));
+		return options;
 	}
 
 }
