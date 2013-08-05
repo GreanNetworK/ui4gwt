@@ -24,7 +24,7 @@ public abstract class BaseEvent {
     }
 
     public Double[] getValues() {
-        return values;
+        return values.clone();
     }
 
     public Widget getSource() {
