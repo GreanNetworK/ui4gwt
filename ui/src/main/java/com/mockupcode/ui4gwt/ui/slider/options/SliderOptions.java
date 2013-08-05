@@ -1,7 +1,12 @@
 package com.mockupcode.ui4gwt.ui.slider.options;
 
+import com.google.gwt.json.client.JSONArray;
 import com.google.gwt.json.client.JSONBoolean;
+import com.google.gwt.json.client.JSONNull;
+import com.google.gwt.json.client.JSONNumber;
 import com.google.gwt.json.client.JSONObject;
+import com.google.gwt.json.client.JSONString;
+import com.google.gwt.json.client.JSONValue;
 import com.mockupcode.ui4gwt.ui.option.Options;
 
 
@@ -24,8 +29,8 @@ public class SliderOptions implements Options {
 	private Orientation orientation = Orientation.HORIZONTAL;
 	private boolean range = false;
 	private int step = 1;
-	private Number value = 0;
-	private Number[] values = null;
+	private double value = 0;
+	private double[] values = null;
 	
 	public boolean isAnimate() {
 		return animate;
@@ -69,23 +74,42 @@ public class SliderOptions implements Options {
 	public void setStep(int step) {
 		this.step = step;
 	}
-	public Number getValue() {
+	public double getValue() {
 		return value;
 	}
-	public void setValue(Number value) {
+	public void setValue(double value) {
 		this.value = value;
 	}
-	public Number[] getValues() {
+	public double[] getValues() {
 		return values;
 	}
-	public void setValues(Number[] values) {
+	public void setValues(double[] values) {
 		this.values = values;
 	}
 	@Override
 	public JSONObject getOptions() {
 		JSONObject options = new JSONObject();
         options.put(ANIMATE, JSONBoolean.getInstance(animate));
+        options.put(DISABLED, JSONBoolean.getInstance(disabled));
+        options.put(MAX, new JSONNumber(max));
+        options.put(MIN, new JSONNumber(min));
+        options.put(ORIENTATION, new JSONString(orientation.getValue()));
+        options.put(RANGE, JSONBoolean.getInstance(range));
+        options.put(STEP, new JSONNumber(step));
+        options.put(VALUE, new JSONNumber(value));
+        options.put(VALUES, getJSONValues());
 		return options;
+	}
+	
+	private JSONValue getJSONValues(){
+		if(values == null){
+			return JSONNull.getInstance();
+		}else{
+	        JSONArray arrayValues = new JSONArray();
+	        arrayValues.set(0, new JSONNumber(values[0]));
+	        arrayValues.set(1, new JSONNumber(values[1]));
+	        return arrayValues;
+		}
 	}
 
 }

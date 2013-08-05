@@ -96,13 +96,13 @@ public class SliderOptionsTest {
 	
 	@Test
 	public void testDefaultOptionsValue(){
-		assertThat(options.getValue(), is((Number)0));
+		assertThat(options.getValue(), is(0d));
 	}
 	
 	@Test
 	public void testSetAndGetValue(){
 		options.setValue(10);
-		assertThat(options.getValue(), equalTo((Number)10));
+		assertThat(options.getValue(), equalTo(10d));
 	}
 	
 	@Test
@@ -112,9 +112,9 @@ public class SliderOptionsTest {
 	
 	@Test
 	public void testSetAndGetValues(){
-		Number[] values = new Number[]{10,20};
+		double[] values = new double[]{10,20};
 		options.setValues(values);
-		assertThat(options.getValues(), is(new Number[]{10,20}));
+		assertThat(options.getValues(), is(new double[]{10,20}));
 	}
 
 }
