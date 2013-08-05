@@ -80,12 +80,16 @@ public class SliderOptions implements Options {
 	public void setValue(double value) {
 		this.value = value;
 	}
+	
+	@SuppressWarnings("all")
 	public double[] getValues() {
 		return values;
 	}
+	@SuppressWarnings("all")
 	public void setValues(double[] values) {
 		this.values = values;
 	}
+	
 	@Override
 	public JSONObject getOptions() {
 		JSONObject options = new JSONObject();
