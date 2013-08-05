@@ -1,5 +1,7 @@
 package com.mockupcode.ui4gwt.ui.slider.options;
 
+import java.util.Arrays;
+
 
 public class SliderOptions {
 	
@@ -65,7 +67,7 @@ public class SliderOptions {
 		return values;
 	}
 	public void setValues(Number[] values) {
-		this.values = values;
+		this.values = Arrays.copyOf(values, values.length);
 	}
 
 }
