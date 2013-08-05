@@ -1,4 +1,4 @@
-package com.mockupcode.ui4gwt.ui.slider.event;
+package com.mockupcode.ui4gwt.ui.event;
 
 import java.util.Arrays;
 

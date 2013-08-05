@@ -11,10 +11,10 @@ import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.Random;
 import com.google.gwt.user.client.ui.Widget;
-import com.mockupcode.ui4gwt.ui.slider.event.SlideEvent;
-import com.mockupcode.ui4gwt.ui.slider.event.StopEvent;
-import com.mockupcode.ui4gwt.ui.slider.handler.SlideHandler;
-import com.mockupcode.ui4gwt.ui.slider.handler.StopHandler;
+import com.mockupcode.ui4gwt.ui.event.SlideEvent;
+import com.mockupcode.ui4gwt.ui.event.StopEvent;
+import com.mockupcode.ui4gwt.ui.handler.SlideHandler;
+import com.mockupcode.ui4gwt.ui.handler.StopHandler;
 
 import java.util.ArrayList;
 import java.util.List;

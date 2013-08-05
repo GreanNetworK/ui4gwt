@@ -1,7 +1,7 @@
-package com.mockupcode.ui4gwt.ui.slider.handler;
+package com.mockupcode.ui4gwt.ui.handler;
 
 import com.google.gwt.event.shared.EventHandler;
-import com.mockupcode.ui4gwt.ui.slider.event.SlideEvent;
+import com.mockupcode.ui4gwt.ui.event.SlideEvent;
 
 /**
  * Created with IntelliJ IDEA.
